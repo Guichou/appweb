@@ -30,7 +30,7 @@ class TaskRestController {
 		this.validateUser(userId);
 		
 		Account a = this.accountRepository.findByUsername(userId);
-		Task result = taskRepository.save(new Task(a,input.uri, input.description));
+		Task result = taskRepository.save(new Task(a,input.title, input.isFinished));
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ServletUriComponentsBuilder

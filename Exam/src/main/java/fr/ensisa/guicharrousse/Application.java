@@ -29,9 +29,9 @@ public class Application {
 						Account account = accountRepository.save(new Account(a,
 								"password"));
 						taskRepository.save(new Task(account,
-								"http://bookmark.com/1/" + a, "A description"));
+								"tache 1", false));
 						taskRepository.save(new Task(account,
-								"http://bookmark.com/2/" + a, "A description"));
+								"tache 2", false));
 					}
 				}
 			};
