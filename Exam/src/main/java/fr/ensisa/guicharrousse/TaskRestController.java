@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/{userId}/bookmarks")
+@RequestMapping("/{userId}/tasks")
 class TaskRestController {
 	
 	//@Autowired
@@ -48,7 +48,7 @@ class TaskRestController {
 	
 	// GET => /bob/bookmars
 	@RequestMapping(method = RequestMethod.GET)
-	Collection<Task> readBookmarks(@PathVariable String userId) {
+	Collection<Task> readTasks(@PathVariable String userId) {
 		this.validateUser(userId);
 		return this.taskRepository.findByAccountUsername(userId);
 	}
