@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Bookmark {
+public class Task {
 
     @JsonIgnore
     @ManyToOne
@@ -18,10 +18,10 @@ public class Bookmark {
     @GeneratedValue
     private Long id;
 
-    Bookmark() { // jpa only
+    Task() { // jpa only
     }
 
-    public Bookmark(Account account, String uri, String description) {
+    public Task(Account account, String uri, String description) {
         this.uri = uri;
         this.description = description;
         this.account = account;

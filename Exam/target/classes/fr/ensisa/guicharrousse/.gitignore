@@ -6,3 +6,6 @@
 /BookmarkRepository.class
 /BookmarkRestController.class
 /UserNotFoundException.class
+/Task.class
+/TaskRepository.class
+/TaskRestController.class

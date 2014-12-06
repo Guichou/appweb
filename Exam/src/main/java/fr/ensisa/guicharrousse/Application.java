@@ -17,7 +17,7 @@ public class Application {
 
 	@Bean
 	CommandLineRunner init(final AccountRepository accountRepository,
-			final BookmarkRepository bookmarkRepository) {
+			final TaskRepository taskRepository) {
 		CommandLineRunner c = new CommandLineRunner() {
 			
 			@Override
@@ -28,9 +28,9 @@ public class Application {
 					{
 						Account account = accountRepository.save(new Account(a,
 								"password"));
-						bookmarkRepository.save(new Bookmark(account,
+						taskRepository.save(new Task(account,
 								"http://bookmark.com/1/" + a, "A description"));
-						bookmarkRepository.save(new Bookmark(account,
+						taskRepository.save(new Task(account,
 								"http://bookmark.com/2/" + a, "A description"));
 					}
 				}

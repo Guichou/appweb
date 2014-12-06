@@ -16,21 +16,21 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/{userId}/bookmarks")
-class BookmarkRestController {
+class TaskRestController {
 	
 	//@Autowired
-	private final BookmarkRepository bookmarkRepository;
+	private final TaskRepository taskRepository;
 
 	private final AccountRepository accountRepository;
 
 	// POST /bob/bookmarks
 	@RequestMapping(method = RequestMethod.POST)
-	ResponseEntity<?> add(@PathVariable String userId, @RequestBody Bookmark input) {
+	ResponseEntity<?> add(@PathVariable String userId, @RequestBody Task input) {
 		// Mapping avec l'objet
 		this.validateUser(userId);
 		
 		Account a = this.accountRepository.findByUsername(userId);
-		Bookmark result = bookmarkRepository.save(new Bookmark(a,input.uri, input.description));
+		Task result = taskRepository.save(new Task(a,input.uri, input.description));
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ServletUriComponentsBuilder
@@ -41,22 +41,22 @@ class BookmarkRestController {
 
 	// GET => /bob/bookmarks/1
 	@RequestMapping(value = "/{bookmarkId}", method = RequestMethod.GET)
-	Bookmark readBookmark(@PathVariable String userId, @PathVariable Long bookmarkId) {
+	Task readBookmark(@PathVariable String userId, @PathVariable Long bookmarkId) {
 		this.validateUser(userId);
-		return this.bookmarkRepository.findOne(bookmarkId);
+		return this.taskRepository.findOne(bookmarkId);
 	}
 	
 	// GET => /bob/bookmars
 	@RequestMapping(method = RequestMethod.GET)
-	Collection<Bookmark> readBookmarks(@PathVariable String userId) {
+	Collection<Task> readBookmarks(@PathVariable String userId) {
 		this.validateUser(userId);
-		return this.bookmarkRepository.findByAccountUsername(userId);
+		return this.taskRepository.findByAccountUsername(userId);
 	}
 
 	@Autowired
-	BookmarkRestController(BookmarkRepository bookmarkRepository,
+	TaskRestController(TaskRepository taskRepository,
 			AccountRepository accountRepository) {
-		this.bookmarkRepository = bookmarkRepository;
+		this.taskRepository = taskRepository;
 		this.accountRepository = accountRepository;
 	}
 

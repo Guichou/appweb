@@ -11,14 +11,14 @@ import javax.persistence.*;
 public class Account {
 
     @OneToMany(mappedBy = "account")
-    private Set<Bookmark> bookmarks = new HashSet<>();
+    private Set<Task> tasks = new HashSet<>();
 
     @Id
     @GeneratedValue
     private Long id;
 
-    public Set<Bookmark> getBookmarks() {
-        return bookmarks;
+    public Set<Task> getBookmarks() {
+        return tasks;
     }
 
     public Long getId() {
