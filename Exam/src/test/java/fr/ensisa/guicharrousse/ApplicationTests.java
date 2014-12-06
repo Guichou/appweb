@@ -1,4 +1,4 @@
-package fr.lespagnol;
+package fr.ensisa.guicharrousse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
