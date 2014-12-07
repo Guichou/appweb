@@ -19,6 +19,7 @@ public class Task {
     private Long id;
 
     Task() { // jpa only
+    	isFinished=false;
     }
 
     public Task(Account account, String title, boolean isFinished) {

@@ -7,8 +7,8 @@
 	    templateUrl: 'tasks.html',
 	    controller: 'TasksController'})
 	   .when('/:userId/tasks/create', {
-	    templateUrl: 'bookmark-create.html',
-	    controller: 'BookmarkCreateController'})
+	    templateUrl: 'task-create.html',
+	    controller: 'TaskCreateController'})
 	    					
 	   .when('/:userId/tasks/:bookmarkId', {
 	    templateUrl: 'bookmark.html',
@@ -36,13 +36,14 @@
 	     $scope.params = $routeParams;
 	 });
 	
-	app.controller('BookmarkCreateController', function($scope, $routeParams, Bookmark) {
-	     $scope.name = "BookmarkCreateController";
-	     $scope.params = $routeParams;
-	     
-	     var bookmark = new Bookmark({userId:$scope.params.userId});
-	     bookmark.uri = "bidon";
-	     bookmark.description = "complete";
-	     bookmark.$save();
+	app.controller('TaskCreateController', function($scope, Task) {
+	     $scope.task = new Task();
+	
+		$scope.createTask = function(){
+		
+			$scope.task.$save();
+			console.log("hello");
+			
+		};
 	 });
 	
