@@ -1,6 +1,5 @@
 package fr.ensisa.guicharrousse;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,29 +9,20 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Task {
 
-    @JsonIgnore
-    @ManyToOne
-    private Account account;
-
+    
     @Id
     @GeneratedValue
     private Long id;
-
-    Task() { // jpa only
-    	isFinished=false;
-    }
-
-    public Task(Account account, String title, boolean isFinished) {
-        this.title = title;
-        this.isFinished = isFinished;
-        this.account = account;
-    }
-
+    
     public String title;
-    public boolean isFinished;
+    public boolean finished;
+    Task() { // jpa only
+    }
 
-    public Account getAccount() {
-        return account;
+    public Task(String title, boolean isFinished) {
+        this.title = title;
+        this.finished = isFinished;
+      
     }
 
     public Long getId() {
@@ -44,6 +34,6 @@ public class Task {
     }
 
     public boolean isFinished() {
-        return isFinished;
+        return this.finished;
     }
 }

@@ -1,7 +1,6 @@
 package fr.ensisa.guicharrousse;
 
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,56 +14,38 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/{userId}/tasks")
+@RequestMapping("/tasks")
 class TaskRestController {
 	
 	//@Autowired
 	private final TaskRepository taskRepository;
 
-	private final AccountRepository accountRepository;
-
-	// POST /bob/bookmarks
-	@RequestMapping(method = RequestMethod.POST)
-	ResponseEntity<?> add(@PathVariable String userId, @RequestBody Task input) {
-		// Mapping avec l'objet
-		this.validateUser(userId);
-		
-		Account a = this.accountRepository.findByUsername(userId);
-		Task result = taskRepository.save(new Task(a,input.title, false));
-
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setLocation(ServletUriComponentsBuilder
-				.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(result.getId()).toUri());
-		return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
-	}
-
-	// GET => /bob/bookmarks/1
-	@RequestMapping(value = "/{bookmarkId}", method = RequestMethod.GET)
-	Task readBookmark(@PathVariable String userId, @PathVariable Long bookmarkId) {
-		this.validateUser(userId);
-		return this.taskRepository.findOne(bookmarkId);
-	}
+//
+//	@RequestMapping(method = RequestMethod.POST)
+//	void add(@PathVariable String userId, @RequestBody Task input) {
+//		// Mapping avec l'objet
+//		
+//		taskRepository.save(new Task(input.title, false));
+//
+//		}
 	
-	// GET => /bob/bookmars
 	@RequestMapping(method = RequestMethod.GET)
-	Collection<Task> readTasks(@PathVariable String userId) {
-		this.validateUser(userId);
-		return this.taskRepository.findByAccountUsername(userId);
+	Collection<Task> readTasks() {
+		System.out.println(this.taskRepository.findAll().toString());
+		return this.taskRepository.findAll();
 	}
+
+//	@RequestMapping(value = "/{taskId}", method = RequestMethod.GET)
+//	Task readTask(@PathVariable Long id) {
+//		System.out.println(this.taskRepository.findOne(id).getTitle());
+//		return this.taskRepository.findOne(id);
+//	}
+	
+
+	
 
 	@Autowired
-	TaskRestController(TaskRepository taskRepository,
-			AccountRepository accountRepository) {
+	TaskRestController(TaskRepository taskRepository) {
 		this.taskRepository = taskRepository;
-		this.accountRepository = accountRepository;
-	}
-
-	private void validateUser(String userId) {
-
-		Account a = this.accountRepository.findByUsername(userId);
-		if(a == null)
-			throw new UserNotFoundException(userId);
-				
 	}
 }
