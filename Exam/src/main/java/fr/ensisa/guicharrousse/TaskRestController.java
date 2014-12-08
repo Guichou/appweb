@@ -1,20 +1,13 @@
 package fr.ensisa.guicharrousse;
 
 import java.util.Collection;
-import java.util.List;
 
-import org.hibernate.annotations.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/tasks")
@@ -22,17 +15,25 @@ class TaskRestController {
 	
 	//@Autowired
 	private final TaskRepository taskRepository;
-
-	//private final AccountRepository accountRepository;
-
-	// POST /bob/bookmarks
-	@RequestMapping(method = RequestMethod.POST)
-	void add(@RequestBody Task input) {
-		// Mapping avec l'objet
-		
-		taskRepository.save(new Task(input.getTitle(), false));
-
-	}
+	
+		// PUT
+		@RequestMapping(method = RequestMethod.PUT)
+		void update(@RequestBody Task input,@PathVariable Long taskId) {
+			//Task t = taskRepository.getOne(taskId);
+			taskRepository.delete(taskRepository.getOne(taskId));
+			System.out.println("deleted");
+			//t.setTitle(input.getTitle());
+			taskRepository.save(input);
+		}
+		// POST
+		@RequestMapping(method = RequestMethod.POST)
+		void add(@RequestBody Task input) {
+			taskRepository.save(new Task(input.getTitle(), false));
+			System.out.println("added");
+	
+		}
+	
+	
 
 //	// GET => /bob/bookmarks/1
 //	@RequestMapping(value = "/{bookmarkId}", method = RequestMethod.GET)
@@ -43,9 +44,9 @@ class TaskRestController {
 //	
 	// GET => /bob/bookmars
 	@RequestMapping(method = RequestMethod.GET)
-	List<Task> readTasks() {
-		
-		return this.taskRepository.findAll();
+	Collection<Task> readTasks() {
+		System.out.println(this.taskRepository.findAll());
+		return this.taskRepository.findAll();//problem here
 	}
 
 	@Autowired
