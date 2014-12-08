@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="task">
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/app.css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"> </script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular-route.min.js"> </script>
@@ -11,8 +11,10 @@
 	<body>
 	<div class="container">
 		<div class = "row" ><h2 class = "col-md-6 col-md-offset-4">Welcome in ToDo List App !</h2></div>
-		<div class = "row"><div class="col-md-6 col-md-offset-4"><a href="/#/tasks/create" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add a task</a></div></div>
-		<div ng-view></div>
+		<div class = "row"><div class="col-md-2 col-md-offset-4"><a href="/#/tasks/create" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add a task</a></div>
+		<div class="col-md-2"></div>
+		</div>
+		<div class="row"><div ng-view></div></div>
 		
 	</div>
 	</body>

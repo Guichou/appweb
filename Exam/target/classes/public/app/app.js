@@ -30,9 +30,21 @@ app.factory('Task', [ '$resource', function($resource) {
 } ]);
 
 app.controller('TasksController', function($scope, $routeParams, Task) {
-	// $scope.name = "TasksController"; //n'a aucune influence
 	$scope.params = $routeParams;
-	$scope.tasks = Task.query();// problem here
+	$scope.tasks = Task.query();
+	
+	$scope.deleteTask = function(task){
+		task.taskId = task.id;
+		task.$delete();
+		window.setTimeout(function(){location.reload()},1500);
+	}
+	$scope.updateTaskState = function(task){
+		task.finished = !task.finished;
+		task.$update();
+		window.setTimeout(function(){location.reload()},800);
+	}
+	
+	
 });
 
 // app.controller('BookmarkController', function($scope, $routeParams) {
@@ -46,11 +58,20 @@ app.controller('TaskCreateController', function($scope, Task) {
 	$scope.createTask = function() {
 
 		$scope.task.$save();
-		window.location.replace("/#/tasks");
+		window.setTimeout(function(){window.location.replace("/#/tasks")},2000);
 		
 
 	};
 });
+
+//app.controller('TaskDeleteController', function($scope, $routeParams, Task) {
+//	$scope.task = new Task();
+//	$scope.params = $routeParams;
+//	$scope.task.id=$routeParams.taskId;
+//	$scope.task.$delete();
+//	window.setTimeout(function(){window.location.replace("/#/tasks")},1000);
+//
+//});
 
 app.controller('TaskUpdateController', function($scope, $routeParams, Task) {
 	$scope.task = new Task();
@@ -59,7 +80,8 @@ app.controller('TaskUpdateController', function($scope, $routeParams, Task) {
 	$scope.updateTitle = function(task) {
 		task.id = $routeParams.taskId;
 		$scope.task.$update();
-		window.location.replace("/#/tasks");
+		window.setTimeout(function(){window.location.replace("/#/tasks")},2000);
 
 	};
+	
 });
