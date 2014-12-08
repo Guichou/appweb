@@ -16,23 +16,19 @@ import org.springframework.context.annotation.Configuration;
 public class Application {
 
 	@Bean
-	CommandLineRunner init(final AccountRepository accountRepository,
-			final TaskRepository taskRepository) {
+	CommandLineRunner init(final TaskRepository taskRepository) {
 		CommandLineRunner c = new CommandLineRunner() {
 			
 			@Override
 			public void run(String... string) throws Exception {
 
-					String[] strings = {"jhoeller","dsyer","pwebb","ogierke","rwinch","mfisher","mpollack","jlong"};
-					for(String a : strings)
-					{
-						Account account = accountRepository.save(new Account(a,
-								"password"));
-						taskRepository.save(new Task(account,
+					
+						
+						taskRepository.save(new Task(
 								"tache 1", false));
-						taskRepository.save(new Task(account,
+						taskRepository.save(new Task(
 								"tache 2", false));
-					}
+					
 				}
 			};
 	

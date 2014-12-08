@@ -10,17 +10,13 @@ import javax.persistence.*;
 @Entity
 public class Account {
 
-    @OneToMany(mappedBy = "account")
-    private Set<Task> tasks = new HashSet<>();
+   
 
     @Id
     @GeneratedValue
     private Long id;
 
-    public Set<Task> getBookmarks() {
-        return tasks;
-    }
-
+    
     public Long getId() {
         return id;
     }

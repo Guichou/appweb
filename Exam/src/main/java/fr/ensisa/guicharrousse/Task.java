@@ -10,30 +10,38 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Task {
 
-    @JsonIgnore
-    @ManyToOne
-    private Account account;
+//    @JsonIgnore
+//    @ManyToOne
+//    private Account account;
 
     @Id
     @GeneratedValue
     private Long id;
+	private String title;
+	private boolean finished;
+	
+    public void setId(Long id) {
+		this.id = id;
+	}
 
-    Task() { // jpa only
-    	isFinished=false;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+
+	Task() { // jpa only
     }
 
-    public Task(Account account, String title, boolean isFinished) {
+    public Task(String title, boolean isFinished) {
         this.title = title;
-        this.isFinished = isFinished;
-        this.account = account;
+        this.finished = isFinished;
+
     }
 
-    public String title;
-    public boolean isFinished;
-
-    public Account getAccount() {
-        return account;
-    }
+    
 
     public Long getId() {
         return id;
@@ -44,6 +52,6 @@ public class Task {
     }
 
     public boolean isFinished() {
-        return isFinished;
+        return this.finished;
     }
 }
