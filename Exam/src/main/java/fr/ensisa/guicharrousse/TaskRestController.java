@@ -18,19 +18,16 @@ class TaskRestController {
 	
 		// PUT
 		@RequestMapping(method = RequestMethod.PUT)
-		void update(@RequestBody Task input,@PathVariable Long taskId) {
-			//Task t = taskRepository.getOne(taskId);
-			taskRepository.delete(taskRepository.getOne(taskId));
+		void update(@RequestBody Task input) {
 			System.out.println("deleted");
-			//t.setTitle(input.getTitle());
-			taskRepository.save(input);
+			this.taskRepository.delete(this.taskRepository.findOne(input.getId()));
+			this.taskRepository.save(input);
+			//this.taskRepository.save(input);
 		}
 		// POST
 		@RequestMapping(method = RequestMethod.POST)
 		void add(@RequestBody Task input) {
-			taskRepository.save(new Task(input.getTitle(), false));
-			System.out.println("added");
-	
+			taskRepository.save(new Task(input.getTitle(), false));	
 		}
 	
 	
@@ -42,11 +39,10 @@ class TaskRestController {
 //		return this.taskRepository.findOne(bookmarkId);
 //	}
 //	
-	// GET => /bob/bookmars
+	
 	@RequestMapping(method = RequestMethod.GET)
 	Collection<Task> readTasks() {
-		System.out.println(this.taskRepository.findAll());
-		return this.taskRepository.findAll();//problem here
+		return this.taskRepository.findAll();
 	}
 
 	@Autowired

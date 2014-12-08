@@ -19,9 +19,9 @@ app.config(function($routeProvider, $locationProvider) {
 
 });
 
-app.factory('Task', [ '$resource', function($resource) {// ici Bookmark -> Task
-	return $resource('/tasks/:bookmarkId', {
-		bookmarkId : '@bookmarkId'
+app.factory('Task', [ '$resource', function($resource) {
+	return $resource('/tasks/:taskId', {
+		taskId : '@taskId'
 	}, {
 		update : {
 			method : 'PUT'
@@ -29,10 +29,7 @@ app.factory('Task', [ '$resource', function($resource) {// ici Bookmark -> Task
 	});
 } ]);
 
-app.controller('TasksController', function($scope, $routeParams, Task) {// ici
-																		// Bookmark
-																		// ->
-																		// Task
+app.controller('TasksController', function($scope, $routeParams, Task) {
 	// $scope.name = "TasksController"; //n'a aucune influence
 	$scope.params = $routeParams;
 	$scope.tasks = Task.query();// problem here
@@ -49,7 +46,8 @@ app.controller('TaskCreateController', function($scope, Task) {
 	$scope.createTask = function() {
 
 		$scope.task.$save();
-		console.log("hello");
+		window.location.replace("/#/tasks");
+		
 
 	};
 });
@@ -59,10 +57,9 @@ app.controller('TaskUpdateController', function($scope, $routeParams, Task) {
 	$scope.params = $routeParams;
 
 	$scope.updateTitle = function(task) {
-		task.taskId = task.id;
-		//alert("yo");
+		task.id = $routeParams.taskId;
 		$scope.task.$update();
-		console.log("hello");
+		window.location.replace("/#/tasks");
 
 	};
 });
