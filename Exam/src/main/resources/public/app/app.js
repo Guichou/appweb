@@ -13,10 +13,6 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl : 'todo.html',
 		controller : 'TasksController'
 	})
-	// .when('/:userId/tasks/:bookmarkId', {
-	// templateUrl: 'bookmark.html',
-	// controller: 'BookmarkController'})
-
 });
 
 app.factory('Task', [ '$resource', function($resource) {
@@ -41,17 +37,12 @@ app.controller('TasksController', function($scope, $routeParams, Task) {
 	$scope.updateTaskState = function(task){
 		task.finished = !task.finished;
 		task.$update();
-		window.setTimeout(function(){location.reload()},800);
+		window.setTimeout(function(){location.reload()},500);
 	}
 	
 	
 });
-
-// app.controller('BookmarkController', function($scope, $routeParams) {
-// $scope.name = "BookmarkController";
-// $scope.params = $routeParams;
-// });
-//	
+	
 app.controller('TaskCreateController', function($scope, Task) {
 	$scope.task = new Task();
 
@@ -63,15 +54,6 @@ app.controller('TaskCreateController', function($scope, Task) {
 
 	};
 });
-
-//app.controller('TaskDeleteController', function($scope, $routeParams, Task) {
-//	$scope.task = new Task();
-//	$scope.params = $routeParams;
-//	$scope.task.id=$routeParams.taskId;
-//	$scope.task.$delete();
-//	window.setTimeout(function(){window.location.replace("/#/tasks")},1000);
-//
-//});
 
 app.controller('TaskUpdateController', function($scope, $routeParams, Task) {
 	$scope.task = new Task();

@@ -5,4 +5,15 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
-@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
+body {
+    background-image: url("../img/background2.png");
+}
+
+footer{
+	
+	bottom:0;
+	text-align:center;
+	display: block;
+}
+/*@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");*/

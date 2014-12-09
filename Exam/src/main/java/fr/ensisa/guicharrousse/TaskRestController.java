@@ -21,7 +21,6 @@ class TaskRestController {
 	void update(@RequestBody Task input) {
 		this.taskRepository.delete(this.taskRepository.findOne(input.getId()));
 		this.taskRepository.save(input);
-		// this.taskRepository.save(input);
 	}
 
 	// POST
@@ -37,15 +36,7 @@ class TaskRestController {
 		taskRepository.delete(taskId);
 	}
 
-	// // GET => /bob/bookmarks/1
-	// @RequestMapping(value = "/{bookmarkId}", method = RequestMethod.GET)
-	// Task readBookmark(@PathVariable String userId, @PathVariable Long
-	// bookmarkId) {
-	// this.validateUser(userId);
-	// return this.taskRepository.findOne(bookmarkId);
-	// }
-	//
-
+	//GET ALL
 	@RequestMapping(method = RequestMethod.GET)
 	Collection<Task> readTasks() {
 		return this.taskRepository.findAll();
@@ -54,14 +45,5 @@ class TaskRestController {
 	@Autowired
 	TaskRestController(TaskRepository taskRepository) {
 		this.taskRepository = taskRepository;
-		// this.accountRepository = accountRepository;
 	}
-
-	// private void validateUser(String userId) {
-	//
-	// Account a = this.accountRepository.findByUsername(userId);
-	// if(a == null)
-	// throw new UserNotFoundException(userId);
-	//
-	// }
 }

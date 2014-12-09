@@ -10,10 +10,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Task {
 
-//    @JsonIgnore
-//    @ManyToOne
-//    private Account account;
-
     @Id
     @GeneratedValue
     private Long id;
